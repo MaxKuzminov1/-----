@@ -1,0 +1,98 @@
+#include <iostream>
+#include <ctime>
+#include <windows.h>
+using namespace std;
+void SSpaper_user(int& unum)
+{
+	if (unum == 1)
+	{
+		cout << "\t\tВы выбрали Камень\n" << endl;
+
+	}
+	else if (unum == 2)
+	{
+		cout << "\t\tВы выбрали Ножницы\n" << endl;
+
+	}
+	else if (unum == 3)
+	{
+		cout << "\t\tВы выбрали Бумагу\n" << endl;
+
+	}
+	else
+	{
+		cout << "\t\tВы выбрали неправильное число и проиграете\n" << endl;
+	}
+}
+void SSpaper_game(int& rnum)
+{
+	if (rnum == 1)
+	{
+		cout << "\t\tПротивник выбрал Камень\n" << endl;
+
+	}
+	if (rnum == 2)
+	{
+		cout << "\t\tПротивник выбрал Ножницы\n" << endl;
+
+	}
+	if (rnum == 3)
+	{
+		cout << "\t\tПротивник выбрал Бумагу\n" << endl;
+
+	}
+}
+void game(int& unum, int& rnum, int& bid)
+{
+	if ((unum == 1 and rnum == 2) or (unum == 2 and rnum == 3) or (unum == 3 and rnum == 1))
+	{
+		bid *= 2;
+		cout << "\t\t\tВЫ ПОБЕДИЛИ\n" << endl;
+	}
+	else if ((unum == 2 and rnum == 1) or (unum == 3 and rnum == 2) or (unum == 1 and rnum == 3))
+	{
+		bid = 0;
+		cout << "\t\t\tВЫ ПРОИГРАЛИ\n" << endl;
+	}
+	else if (unum == rnum)
+	{
+		cout << "\t\t\tНИЧЬЯ\n" << endl;
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "ru");
+	srand(time(NULL));
+	int balance, bid, unum, again;
+	again = 1;
+	balance = 5000;
+	while (balance > 0)
+	{
+		system("cls");
+		cout << "\t\t====Камень-Ножницы-Бумага=====" << endl;
+		int rnum = rand() % 2 + 1;
+
+		cout << "Баланс: " << balance << endl;;
+		cout << "Сумма ставки: ";
+		cin >> bid;
+		balance -= bid;
+		cout << "Выберите цифру\n 1-Камень, 2-Ножницы, 3-Бумага" << endl;;
+		cin >> unum;
+		SSpaper_user(unum);
+		Sleep(800);
+		SSpaper_game(rnum);
+		Sleep(800);
+		game(unum, rnum, bid);
+		Sleep(800);
+		balance += bid;
+		cout << "Ваш баланс: " << balance << endl;
+		cout << "Хотите сыграть ещё раз нажмите 1, если нет нажмите 2 " << endl;
+		cin >> again;
+		if (again != 1)
+		{
+			balance = 0;
+		}
+	}
+	cout << "Игра закончена" << endl;
+} 
